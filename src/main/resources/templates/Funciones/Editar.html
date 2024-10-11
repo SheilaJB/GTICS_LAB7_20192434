@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Edición de evento</title>
+</head>
+<body>
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+<main>
+    <div class="container px-4 py-5">
+
+        <div class="container my-4">
+            <h1>Edición de un Evento</h1>
+            <div class="row">
+                <div th:if="${msg}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                <div th:if="${msg}" class="alert alert-success" th:text="${successMessage}"></div>
+
+                <form th:action="@{/funciones/save}" method="post" class="mt-2" th:object="${funciones}">
+                    <div class="row mt-4">
+                        <input th:field="*{id}" type="hidden"/>
+
+                        <!-- Nombre del Evento -->
+                        <div class="col-6 mb-3">
+                            <label class="form-label">Nombre de la función</label>
+                            <input type="text" class="form-control" th:field="*{nombre}">
+                            <!-- Mensaje de error para el campo 'nombre' -->
+                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger">
+                                <p th:each="err : ${#fields.errors('nombre')}" th:text="${err}"></p>
+                            </div>
+                        </div>
+
+                        <!-- Fecha del Evento -->
+                        <div class="col-3 mb-3">
+                            <label class="form-label">Fecha del evento</label>
+                            <input type="text" class="form-control" th:field="*{fecha}" placeholder="dd-MM-yyyy"/>
+                            <!-- Mensaje de error para el campo 'fecha' -->
+                            <div th:if="${#fields.hasErrors('fecha')}" class="text-danger">
+                                <p th:each="err : ${#fields.errors('fecha')}" th:text="${err}"></p>
+                            </div>
+
+                        </div>
+
+                        <!-- Número de Asistencia -->
+                        <div class="col-3 mb-3">
+                            <label class="form-label">Número de asistencia</label>
+                            <input type="text" class="form-control" th:field="*{asistentesEsperados}">
+                            <!-- Mensaje de error para el campo 'asistentesEsperados' -->
+                            <div th:if="${#fields.hasErrors('asistentesEsperados')}" class="text-danger">
+                                <p th:each="err : ${#fields.errors('asistentesEsperados')}" th:text="${err}"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de acción -->
+                    <div class="mt-5">
+                        <a th:href="@{/funciones/list}" class="btn btn-outline-danger">Regresar</a>
+                        <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

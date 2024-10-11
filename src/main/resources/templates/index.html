@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Home</title>
+</head>
+<body>
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+<main>
+    <div class="container px-4 py-4">
+        <h1>– Bienvenidos a EventMaster -</h1>
+        <!--<a th:href="@{//}">Ir a la gestión de Profesionales</a><br/> -->
+        <!--<a href="#">Ir a la gestión del Historial</a> <br/>
+        <a href="#">Ir a los detalles del Reporte Visual</a><br/> -->
+
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

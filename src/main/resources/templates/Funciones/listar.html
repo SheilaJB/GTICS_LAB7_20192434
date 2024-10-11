@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <title>Lista de Funciones</title>
+</head>
+<body>
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+<main>
+  <div class="container px-4 pb-5">
+
+    <h1 class="pb-2 border-bottom">Lista de Funciones</h1>
+    <a class="btn btn-outline-primary mt-4 mb-4" th:href="@{'/funciones/new'}">Agregar Proyección</a>
+    <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Película</th>
+        <th>Sala</th>
+        <th>Fecha y Hora</th>
+        <th>Asientos Disponibles</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each=" funcion : ${funciones}">
+        <td th:text="${funcion}"></td>
+        <td th:text="${funcion.obra.title}"></td>
+        <td th:text="${funcion.room.name}"></td>
+        <td th:text="${funcion.funcionDate}"></td>
+        <td th:text="${funcion.availableSeats}"></td>
+        <td><a class="btn btn-outline-primary" th:href="@{'/funciones/edit' + '?id=' + ${funcion.id}}">Editar</a>
+        </td>
+        <td><a class="btn btn-outline-danger" th:href="@{'/funciones/delete' + '?id=' + ${funcion.id}}">Borrar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

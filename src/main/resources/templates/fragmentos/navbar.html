@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<header th:fragment="nav_bar" id="page-topbar">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" th:href="@{/home}">TEATROPUCP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Opciones visibles solo para el rol 'admin' -->
+          <li class="nav-item" sec:authorize="hasAuthority('admin')">
+            <a class="nav-link" th:classappend="${active == 'Funciones'?'active':''}"
+               th:href="@{/funciones/listar}">Funciones</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasAuthority('admin')">
+            <a class="nav-link" th:classappend="${active == 'Reservas'?'active':''}"
+               th:href="@{/reservas/listar}">Todas las Reservas</a>
+          </li>
+
+          <!-- Opciones visibles solo para el rol 'gerente' -->
+          <li class="nav-item" sec:authorize="hasAuthority('gerente')">
+            <a class="nav-link" th:classappend="${active == 'Salas'?'active':''}"
+               th:href="@{/salas/listar}">Salas</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasAuthority('gerente')">
+            <a class="nav-link" th:classappend="${active == 'Obras'?'active':''}"
+               th:href="@{/obras/listar}">Obras</a>
+          </li>
+
+          <!-- Opciones visibles tanto para 'admin' como para 'gerente' -->
+          <li class="nav-item" sec:authorize="hasAnyAuthority('admin','gerente')">
+            <a class="nav-link" th:classappend="${active == 'Funciones'?'active':''}"
+               th:href="@{/funciones/listar}">Funciones</a>
+          </li>
+
+          <!-- Opciones visibles solo para el rol 'cliente' -->
+          <li class="nav-item" sec:authorize="hasAuthority('cliente')">
+            <a class="nav-link" th:classappend="${active == 'Obras'?'active':''}"
+               th:href="@{/obras/listar}">Obras</a>
+          </li>
+          <li class="nav-item" sec:authorize="hasAuthority('cliente')">
+            <a class="nav-link" th:classappend="${active == 'MisReservas'?'active':''}"
+               th:href="@{/reservas/misReservas}">Mis Reservas</a>
+          </li>
+        </ul>
+
+        <!-- Mostrar opciones de autenticación -->
+        <div class="ms-auto">
+          <div sec:authorize="isAuthenticated()">
+            <span th:text="|Bienvenido ${#authentication.name}|"></span>
+            <form th:action="@{/logout}" method="post">
+              <input class="btn btn-link" type="submit" value="(Cerrar Sesión)">
+            </form>
+          </div>
+          <div sec:authorize="isAnonymous()">
+            <a th:href="@{/loginForm}">(Iniciar Sesión)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+</body>
+</html>

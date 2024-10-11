@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Creación de Función</title>
+</head>
+<body>
+<header th:replace="~{fragmentos/navbar :: nav_bar}"></header>
+<main>
+    <div class="container px-4 py-5">
+
+        <div class="container my-4">
+            <h1>Creación de una Funciones</h1>
+            <div class="row">
+                <!-- Mostrar mensaje de éxito o error
+                <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+                <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div> -->
+
+                <form th:action="@{/funciones/save}" method="post" class="mt-2">
+                    <div class="row mt-4">
+                        <div class="col-3 mb-3">
+                            <label for="obra" class="form-label">Nombre de la Obra</label>
+                            <input type="text" class="form-control" name="obra" id="obra" required>
+
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="room" class="form-label">Sala de la función</label>
+                            <input type="text" class="form-control" name="room" id="room" required>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="funcionDate" class="form-label">Sala de la función</label>
+                            <input type="text" class="form-control" name="funcionDate" id="funcionDate" required>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="availableSeats" class="form-label">Número de asistencia</label>
+                            <input type="text" class="form-control" name="availableSeats" id="availableSeats" required>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <a th:href="@{/funciones/list}" class="btn btn-outline-danger">Regresar</a>
+                        <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
